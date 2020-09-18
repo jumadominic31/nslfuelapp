@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -14,13 +14,42 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary" floating>From</ion-label>
-      <ion-input [(ngModel)]='inputData.from'></ion-input>
+      <ion-input [(ngModel)]='binputData.from'></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary" floating>To</ion-label>
-      <ion-input [(ngModel)]='inputData.to'></ion-input>
+      <ion-label color="primary">To</ion-label>
+      <ion-select [(ngModel)]="binputData.to">
+        <ion-option value="nes">NES</ion-option>
+        <ion-option value="n64">Nintendo64</ion-option>
+        <ion-option value="ps">PlayStation</ion-option>
+        <ion-option value="genesis">Sega Genesis</ion-option>
+        <ion-option value="saturn">Sega Saturn</ion-option>
+        <ion-option value="snes">SNES</ion-option>
+      </ion-select>
     </ion-item>
-    <div hidden></div>
+    <ion-item>
+      <ion-label color="primary">Date</ion-label>
+      <ion-datetime displayFormat="D-MMM-YYYY" pickerFormat="D-MMM-YYYY" [(ngModel)]="binputData.date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Bus</ion-label>
+      <ion-select [(ngModel)]="binputData.bus">
+        <ion-option value="nes">NES</ion-option>
+        <ion-option value="n64">Nintendo64</ion-option>
+        <ion-option value="ps">PlayStation</ion-option>
+        <ion-option value="genesis">Sega Genesis</ion-option>
+        <ion-option value="saturn">Sega Saturn</ion-option>
+        <ion-option value="snes">SNES</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Name</ion-label>
+      <ion-input [(ngModel)]='binputData.name'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Fare</ion-label>
+      <ion-input type="number" [(ngModel)]='binputData.fare'></ion-input>
+    </ion-item>
   </ion-list>
-  <button ion-button full (click)="prepareToPrint(inputData)">Book</button>
+  <button ion-button full (click)="confirmBooking(binputData)">Book</button>
 </ion-content>

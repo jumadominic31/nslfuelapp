@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the DeliveryPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DelisummPage } from './../delisumm/delisumm';
 
-@IonicPage()
 @Component({
   selector: 'page-delivery',
   templateUrl: 'delivery.html',
 })
 export class DeliveryPage {
 
+  dinputData: any = {};
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DeliveryPage');
+  }
+
+  confirmDelivery(dinputData) {
+    this.navCtrl.push(DelisummPage, {dinputData : dinputData});
+    console.log(JSON.stringify(dinputData));
   }
 
 }
