@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
 import { PrinterProvider } from './../../providers/printer/printer';
 import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
@@ -92,9 +92,6 @@ export class BooksummPage {
     if (!data.from) {
       data.from = 'Nairobi';
     }
-    if (!data.to) {
-      data.to = 'Kisumu';
-    }
     let company = "Nucleur Ltd";
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();
@@ -106,16 +103,21 @@ export class BooksummPage {
       .line(company)
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
       .text(commands.HORIZONTAL_LINE.HR_58MM)
-      .text(commands.HORIZONTAL_LINE.HR2_58MM)
       .align('left')
       .text('From: ' + data.from)
+      .newline()
       .text('To: ' + data.to)
+      .newline()
       .text('Date: ' + data.date)
-      .text('Bus: ' + data.bus)
+      .newline()
+      .text('Bus: ' + data.vehicle)
+      .newline()
       .text('Fare: ' + data.fare)
+      .newline()
       .text('Name: ' + data.name)
       .newline()
       .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
+      .newline()
       .newline()
       .newline()
       .newline()

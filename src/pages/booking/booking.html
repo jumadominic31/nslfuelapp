@@ -12,44 +12,51 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label color="primary" floating>From</ion-label>
-      <ion-input [(ngModel)]='binputData.from'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">To</ion-label>
-      <ion-select [(ngModel)]="binputData.to">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">Date</ion-label>
-      <ion-datetime displayFormat="D-MMM-YYYY" pickerFormat="D-MMM-YYYY" [(ngModel)]="binputData.date"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">Bus</ion-label>
-      <ion-select [(ngModel)]="binputData.bus">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Name</ion-label>
-      <ion-input [(ngModel)]='binputData.name'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Fare</ion-label>
-      <ion-input type="number" [(ngModel)]='binputData.fare'></ion-input>
-    </ion-item>
+    <form novalidate (ngSubmit)="confirmBooking(binputData)" [formGroup]="bookingform" >
+      <ion-item>
+        <ion-label color="primary" floating >From</ion-label>
+        <ion-input formControlName='from' [(ngModel)]='binputData.from' [class.error1]='!bookingform.controls.from.valid && bookingform.controls.from.dirty'></ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="( bookingform.get('from').hasError('required') ) && bookingform.get('from').touched">
+        <div class="error" *ngIf="bookingform.get('from').hasError('required') && bookingform.get('from').touched">
+          Please input From location
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">To</ion-label>
+        <ion-select formControlName='to' [(ngModel)]="binputData.to"  >
+          <ion-option value="nes">NES</ion-option>
+          <ion-option value="n64">Nintendo64</ion-option>
+          <ion-option value="ps">PlayStation</ion-option>
+          <ion-option value="genesis">Sega Genesis</ion-option>
+          <ion-option value="saturn">Sega Saturn</ion-option>
+          <ion-option value="snes">SNES</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Date</ion-label>
+        <ion-datetime formControlName='date' displayFormat="D-MMM-YYYY" pickerFormat="D-MMM-YYYY" [(ngModel)]="binputData.date" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Bus</ion-label>
+        <ion-select formControlName='vehicle' [(ngModel)]="binputData.vehicle" >
+          <ion-option value="nes">NES</ion-option>
+          <ion-option value="n64">Nintendo64</ion-option>
+          <ion-option value="ps">PlayStation</ion-option>
+          <ion-option value="genesis">Sega Genesis</ion-option>
+          <ion-option value="saturn">Sega Saturn</ion-option>
+          <ion-option value="snes">SNES</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating >Name</ion-label>
+        <ion-input formControlName='pass_name' [(ngModel)]='binputData.name'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating >Fare</ion-label>
+        <ion-input formControlName='fare' type="number" [(ngModel)]='binputData.fare'></ion-input>
+      </ion-item>
+      <button ion-button full type="submit" [disabled]="bookingform.invalid">Book</button>
+    </form>
   </ion-list>
-  <button ion-button full (click)="confirmBooking(binputData)">Book</button>
 </ion-content>

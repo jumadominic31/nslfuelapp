@@ -3,7 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { BookingPage } from './../pages/booking/booking';
 import { DeliveryPage } from './../pages/delivery/delivery';
 import { LoginPage } from './../pages/login/login';
@@ -33,7 +32,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
       { title: 'Booking', component: BookingPage },
       { title: 'Delivery', component: DeliveryPage },
       { title: 'Log Out', component: LoginPage }
