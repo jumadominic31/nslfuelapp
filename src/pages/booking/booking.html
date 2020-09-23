@@ -22,7 +22,7 @@
     <form novalidate (ngSubmit)="confirmBooking(binputData)" [formGroup]="bookingform" >
       <ion-item>
         <ion-label color="primary" floating >From</ion-label>
-        <ion-input formControlName='from' [(ngModel)]='binputData.from' [class.error1]='!bookingform.controls.from.valid && bookingform.controls.from.dirty'></ion-input>
+        <ion-input formControlName='from' disabled [(ngModel)]='binputData.from' [class.error1]='!bookingform.controls.from.valid && bookingform.controls.from.dirty'></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="( bookingform.get('from').hasError('required') ) && bookingform.get('from').touched">
         <div class="error" *ngIf="bookingform.get('from').hasError('required') && bookingform.get('from').touched">
@@ -31,13 +31,8 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary">To</ion-label>
-        <ion-select formControlName='to' [(ngModel)]="binputData.to"  >
-          <ion-option value="nes">NES</ion-option>
-          <ion-option value="n64">Nintendo64</ion-option>
-          <ion-option value="ps">PlayStation</ion-option>
-          <ion-option value="genesis">Sega Genesis</ion-option>
-          <ion-option value="saturn">Sega Saturn</ion-option>
-          <ion-option value="snes">SNES</ion-option>
+        <ion-select formControlName='to' [(ngModel)]="binputData.to" name="to">
+          <ion-option *ngFor="let city of cities" [value]="city">{{city}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -46,13 +41,8 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary">Bus</ion-label>
-        <ion-select formControlName='vehicle' [(ngModel)]="binputData.vehicle" >
-          <ion-option value="nes">NES</ion-option>
-          <ion-option value="n64">Nintendo64</ion-option>
-          <ion-option value="ps">PlayStation</ion-option>
-          <ion-option value="genesis">Sega Genesis</ion-option>
-          <ion-option value="saturn">Sega Saturn</ion-option>
-          <ion-option value="snes">SNES</ion-option>
+        <ion-select formControlName='vehicle' [(ngModel)]="binputData.vehicle" name="vehicle">
+          <ion-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

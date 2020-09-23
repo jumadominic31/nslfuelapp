@@ -32,7 +32,6 @@ export class AuthServiceProvider {
         this.http.get(this.apiUrl+`login.php?id=${credentials.username}&pw=${credentials.password}`)
         .subscribe(data => {
           this.currentUser = new User(data[0].username, data[0].userid, data[0].office_name, data[0].office_id);
-          console.log(data);
           let access = (data[0].status === 'Success');
           observer.next(access);
           observer.complete();
@@ -56,7 +55,7 @@ export class AuthServiceProvider {
   }
 
   constructor(public http: HttpClient) {
-    console.log('Hello AuthServiceProvider Provider');
+    // console.log('Hello AuthServiceProvider Provider');
   }
 
 }

@@ -11,34 +11,21 @@
 
 
 <ion-content padding>
-  <div *ngIf=cities>
-    {{cities}}
-  </div>
   <ion-list>
     <ion-item>
-      <ion-label color="primary">Vehicle</ion-label>
-      <ion-select [(ngModel)]="dinputData.vehicle">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
+      <ion-label color="primary">Bus</ion-label>
+      <ion-select [(ngModel)]="dinputData.vehicle" name="vehicle">
+        <ion-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label color="primary" floating>From</ion-label>
-      <ion-input [(ngModel)]='dinputData.from'></ion-input>
+      <ion-input disabled [(ngModel)]='dinputData.from'></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary">To</ion-label>
-      <ion-select [(ngModel)]="dinputData.to">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
+      <ion-select [(ngModel)]="dinputData.to" name="to">
+        <ion-option *ngFor="let city of cities" [value]="city">{{city}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>

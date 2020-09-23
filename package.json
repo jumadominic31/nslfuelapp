@@ -42,8 +42,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
-    "typescript": "~2.6.2",
-    "ionic": "^3.0.0"
+    "cordova-sqlite-storage": "^5.1.0",
+    "ionic": "^3.0.0",
+    "typescript": "~2.6.2"
   },
   "description": "Nucleur booking app by Quadcorn Ltd",
   "cordova": {
@@ -53,7 +54,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"

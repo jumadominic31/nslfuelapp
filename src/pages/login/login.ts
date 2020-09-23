@@ -15,13 +15,14 @@ import { BookingPage } from './../booking/booking';
 export class LoginPage {
   loading: Loading;
   registerCredentials = { username: '', password: '' };
-
+  cities: any = [];
+  vehicles: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthServiceProvider, private nucltms: NucltmsProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public event: Events, public storage: Storage) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    // console.log('ionViewDidLoad LoginPage');
   }
 
   public login() {
@@ -30,9 +31,21 @@ export class LoginPage {
       if (allowed) {        
         this.navCtrl.setRoot(BookingPage);
         this.event.publish('userLogged', this.registerCredentials.username);
-        this.nucltms.getCities().then(data => {
 
-        })
+        this.cities = ['Naivasha', 'Nairobi', 'Nakuru'];
+        this.vehicles = ['KBH162D', 'KCY398H', 'KCG399H'];
+        this.storage.set('cities', this.cities);
+        this.storage.set('vehicles', this.vehicles);
+
+        // this.nucltms.getCities().then(data => {
+        //   this.cities = data;
+        //   this.storage.set('cities', this.cities);
+        //   console.log(this.cities);
+        // });
+        // this.nucltms.getVehicles().then(data => {
+        //   this.vehicles = data;
+        //   this.storage.set('vehicles', this.vehicles);
+        // });
       } else {
         this.showError("Access Denied");
       }

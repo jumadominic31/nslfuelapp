@@ -18,7 +18,7 @@ export class NucltmsProvider {
   }
 
   constructor(public http: HttpClient, ) {
-    console.log('Hello NucltmsProvider Provider');
+    // console.log('Hello NucltmsProvider Provider');
   }
 
   getCities() {
@@ -48,7 +48,7 @@ export class NucltmsProvider {
   }
 
   postDelivery() {
-    
+
   }
 
 }

@@ -3,6 +3,7 @@ import { AlertController, LoadingController, NavController, NavParams, ToastCont
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PrinterProvider } from './../../providers/printer/printer';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { Storage } from '@ionic/storage' ;
 
 import { BooksummPage } from './../booksumm/booksumm';
 import { LoginPage } from './../login/login';
@@ -14,26 +15,38 @@ import { LoginPage } from './../login/login';
 export class BookingPage {
   username = '';
   office_name = '';
+  cities: any = [];
+  vehicles: any = [];
 
   bookingform: FormGroup;
   binputData: any = {"from" : "", "to" : "", "date" : "", "vehicle" : "", "fare" : "", "name" : ""};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController,
-    private auth: AuthServiceProvider) {
+    private auth: AuthServiceProvider, private storage: Storage) {
     let info = this.auth.getUserInfo();
     this.username = info['username'];
     this.office_name = info['office_name'];
     this.binputData.from = info['office_name'];
+
+    this.storage.get('cities').then(data => {
+      this.cities = data;
+    });
+    this.storage.get('vehicles').then(data => {
+      this.vehicles =  data;
+    });
+
   }
 
   public logout() {
+    this.storage.remove('cities');
+    this.storage.remove('vehicles');
     this.auth.logout().subscribe(succ => {
       this.navCtrl.setRoot(LoginPage)
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BookingPage');
+    // console.log('ionViewDidLoad BookingPage');
     
   }
 
