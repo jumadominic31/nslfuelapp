@@ -4,7 +4,8 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { HomePage } from '../pages/home/home';
@@ -17,6 +18,7 @@ import { LoginPage } from './../pages/login/login';
 import { PrinterProvider } from './../providers/printer/printer';
 import { MyApp } from './app.component';
 import { NucltmsProvider } from '../providers/nucltms/nucltms';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,8 @@ import { NucltmsProvider } from '../providers/nucltms/nucltms';
     DelisummPage
   ],
   imports: [
-    BrowserModule,
-    HttpModule,
+  BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -50,7 +52,8 @@ import { NucltmsProvider } from '../providers/nucltms/nucltms';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BluetoothSerial,
     PrinterProvider,
-    NucltmsProvider
+    NucltmsProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}

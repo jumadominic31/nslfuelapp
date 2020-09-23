@@ -1,8 +1,8 @@
 {
-  "name": "ionic-escpos-bluetooth-printer-sample",
+  "name": "nucleur-tms-with-bt-printer",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Quadcorn Business Solutions",
+  "homepage": "http://quadcorn.co.ke/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -45,7 +45,7 @@
     "typescript": "~2.6.2",
     "ionic": "^3.0.0"
   },
-  "description": "An Ionic project",
+  "description": "Nucleur booking app by Quadcorn Ltd",
   "cordova": {
     "plugins": {
       "cordova-plugin-bluetooth-serial": {},

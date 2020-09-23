@@ -1,5 +1,5 @@
 {
-  "name": "ionic-escpos-bluetooth-printer-sample",
+  "name": "nucleur-tms-with-bt-printer",
   "integrations": {
     "cordova": {}
   },

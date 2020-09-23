@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Events, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -23,11 +23,13 @@ export class MyApp {
   // }
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = BookingPage;
+  rootPage: any = LoginPage;
+
+  username: string;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public event: Events) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -37,6 +39,9 @@ export class MyApp {
       { title: 'Log Out', component: LoginPage }
     ];
 
+    this.event.subscribe('userLogged',(data)=>{
+      this.username = data;
+    });
   }
 
   initializeApp() {
