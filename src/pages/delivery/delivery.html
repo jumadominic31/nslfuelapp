@@ -12,46 +12,49 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label color="primary">Bus</ion-label>
-      <ion-select [(ngModel)]="dinputData.vehicle" name="vehicle">
-        <ion-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>From</ion-label>
-      <ion-input disabled [(ngModel)]='dinputData.from'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">To</ion-label>
-      <ion-select [(ngModel)]="dinputData.to" name="to">
-        <ion-option *ngFor="let city of cities" [value]="city">{{city}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Num of Passengers</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.numpass'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Collected Amount</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.collamt'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Service Charge</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.svcch'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Loan</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.loan'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Insurance</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.ins'></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Other Charge</ion-label>
-      <ion-input type="number" [(ngModel)]='dinputData.other'></ion-input>
-    </ion-item>
+    <form novalidate (ngSubmit)="confirmDelivery(dinputData)" [formGroup]="deliveryform" >
+      <ion-item>
+        <ion-label color="primary" floating>From*</ion-label>
+        <ion-input formControlName='from' disabled [(ngModel)]='dinputData.from'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">To*</ion-label>
+        <ion-select formControlName='to' [(ngModel)]="dinputData.to" name="to">
+          <ion-option *ngFor="let city of cities" [value]="city">{{city}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Bus*</ion-label>
+        <ion-select formControlName='vehicle' [(ngModel)]="dinputData.vehicle" name="vehicle">
+          <ion-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Num of Passengers*</ion-label>
+        <ion-input formControlName='numpass' type="number" [(ngModel)]='dinputData.numpass'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Collected Amount*</ion-label>
+        <ion-input formControlName='collamt' type="number" [(ngModel)]='dinputData.collamt'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Service Charge*</ion-label>
+        <ion-input formControlName='svcch' type="number" [(ngModel)]='dinputData.svcch'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Loan</ion-label>
+        <ion-input formControlName='loan' type="number" [(ngModel)]='dinputData.loan'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Insurance</ion-label>
+        <ion-input formControlName='ins' type="number" [(ngModel)]='dinputData.ins'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Other Charge</ion-label>
+        <ion-input formControlName='other' type="number" [(ngModel)]='dinputData.other'></ion-input>
+      </ion-item>
+      <button ion-button full type="submit" [disabled]="deliveryform.invalid">Create Delivery</button>
+    </form>
+    <button ion-button full color="danger" (click)=resetVals()>Reset Form</button>
   </ion-list>
-  <button ion-button full (click)="confirmDelivery(dinputData)">Confirm Delivery</button>
 </ion-content>

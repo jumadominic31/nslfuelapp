@@ -16,30 +16,20 @@
 <ion-content padding>
   <ion-list *ngIf="dprintData">
     <ion-item>
-      <ion-label color="primary">Vehicle</ion-label>
-      <ion-select [(ngModel)]="dprintData.vehicle" disabled>
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
+      <ion-label color="primary" floating>Delivery #</ion-label>
+      <ion-input [(ngModel)]='dprintData.deliverynum' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Vehicle</ion-label>
+      <ion-input [(ngModel)]='dprintData.vehicle' disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" floating>From</ion-label>
       <ion-input [(ngModel)]='dprintData.from' disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary">To</ion-label>
-      <ion-select [(ngModel)]="dprintData.to" disabled>
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
+      <ion-label color="primary" floating>To</ion-label>
+      <ion-input [(ngModel)]='dprintData.to' disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" floating>Num of Passengers</ion-label>
@@ -66,5 +56,6 @@
       <ion-input type="number" [(ngModel)]='dprintData.other' disabled></ion-input>
     </ion-item>
   </ion-list>
-  <button ion-button full (click)="confirmDelivery(dprintData)">Print Delivery</button>
+  <button ion-button full (click)="prepareToPrint(dprintData)">Print</button>
+  <button ion-button full color="danger" (click)=gotoDelivery()>Back to Delivery</button>
 </ion-content>

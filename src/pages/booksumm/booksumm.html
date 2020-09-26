@@ -13,34 +13,24 @@
 <ion-content padding>
   <ion-list *ngIf="bprintData">
     <ion-item>
+      <ion-label color="primary" floating>Ticket #</ion-label>
+      <ion-input [(ngModel)]='bprintData.ticket' disabled></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label color="primary" floating>From</ion-label>
       <ion-input [(ngModel)]='bprintData.from' disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary">To</ion-label>
-      <ion-select [(ngModel)]="bprintData.to" disabled>
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
+      <ion-label color="primary" floating>To</ion-label>
+      <ion-input [(ngModel)]='bprintData.to' disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary">Date</ion-label>
-      <ion-datetime displayFormat="D-MMM-YYYY" pickerFormat="D-MMM-YYYY" [(ngModel)]="bprintData.date" disabled></ion-datetime>
+      <ion-label color="primary" floating>Date</ion-label>
+      <ion-input [(ngModel)]='bprintData.date' disabled></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary">Bus</ion-label>
-      <ion-select [(ngModel)]="bprintData.vehicle" disabled>
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
-      </ion-select>
+      <ion-label color="primary" floating>Bus</ion-label>
+      <ion-input [(ngModel)]='bprintData.vehicle' disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" floating>Name</ion-label>
@@ -52,4 +42,5 @@
     </ion-item>
   </ion-list>
   <button ion-button full (click)="prepareToPrint(bprintData)">Print</button>
+  <button ion-button full color="danger" (click)=gotoBooking()>Back to Booking</button>
 </ion-content>

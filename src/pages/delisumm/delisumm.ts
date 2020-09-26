@@ -4,6 +4,8 @@ import { PrinterProvider } from './../../providers/printer/printer';
 import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
 
+import { DeliveryPage } from './../delivery/delivery';
+
 @Component({
   selector: 'page-delisumm',
   templateUrl: 'delisumm.html',
@@ -18,6 +20,10 @@ export class DelisummPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DelisummPage');
+  }
+
+  gotoDelivery() {
+    this.navCtrl.setRoot(DeliveryPage);
   }
 
   showToast(data) {
@@ -92,7 +98,10 @@ export class DelisummPage {
     if (!data.from) {
       data.from = 'Nairobi';
     }
-    let company = "Nucleur Ltd";
+    let company = "Nucleur Investments Ltd";
+    let addr = "Nairobi";
+    let today = new Date();
+    let printDate = today.toISOString().split('T')[0];
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();
 
@@ -101,31 +110,53 @@ export class DelisummPage {
       .align('center')
       .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
       .line(company)
+      .newline()
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
+      .line(addr)
+      .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .align('left')
-      .text('Vehicle: ' + data.vehicle)
+      .text('DELIVERY RECEIPT')
       .newline()
-      .text('From:    ' + data.from)
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Date:        ' + printDate)
       .newline()
-      .text('To:      ' + data.to)
+      .text('Delivery No: ' + data.deliverynum)
       .newline()
-      .text('Date:    ' + data.date)
+      .text('Client Name: ' + data.ownername)
       .newline()
-      .text('Passengers: ' + data.numpass)
+      .text('Vehicle:     ' + data.vehicle)
       .newline()
-      .text('Collected: ' + data.collamt)
+      .text('From:        ' + data.from)
       .newline()
-      .text('Loan:    ' + data.loan)
+      .text('To:          ' + data.to)
       .newline()
-      .text('Insurance: ' + data.ins)
+      .text('Passengers:  ' + data.numpass)
       .newline()
-      .text('Others:  ' + data.other)
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Payment Details')
       .newline()
-      .text('Balance: ' + data.bal)
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Gross Amt:   ' + data.collamt)
       .newline()
-      .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Svc Charge:  ' + data.svcch)
       .newline()
+      .text('Others Tot:  ' + data.other)
+      .newline()
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Net Amt:     ' + data.netamt)
+      .newline()
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .newline()
+      .newline()
+      .text('Booked by:   ' + data.username)
+      .newline()
+      .newline()
+      .align('center')
+      .text('Terms and Conditions Apply')
+      .newline()
+      .text('info@nucleurinvestments.com')
       .newline()
       .newline()
       .newline()

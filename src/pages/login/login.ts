@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController, Loading, IonicPage, Events } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { NucltmsProvider } from './../../providers/nucltms/nucltms';
 import { Storage } from '@ionic/storage' ;
 
-import { BookingPage } from './../booking/booking';
+import { BookingPage } from '../booking/booking';
 
 
 // @IonicPage()
@@ -29,9 +29,9 @@ export class LoginPage {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
       if (allowed) {        
-        this.navCtrl.setRoot(BookingPage);
+        
         this.event.publish('userLogged', this.registerCredentials.username);
-
+        
         this.cities = ['Naivasha', 'Nairobi', 'Nakuru'];
         this.vehicles = ['KBH162D', 'KCY398H', 'KCG399H'];
         this.storage.set('cities', this.cities);
@@ -46,6 +46,7 @@ export class LoginPage {
         //   this.vehicles = data;
         //   this.storage.set('vehicles', this.vehicles);
         // });
+        setTimeout(() => {this.navCtrl.setRoot(BookingPage)}, 2000);
       } else {
         this.showError("Access Denied");
       }

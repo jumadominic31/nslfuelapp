@@ -3,6 +3,7 @@ import { AlertController, LoadingController, NavController, NavParams, ToastCont
 import { PrinterProvider } from './../../providers/printer/printer';
 import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
+import { BookingPage } from '../booking/booking';
 
 @Component({
   selector: 'page-booksumm',
@@ -14,10 +15,15 @@ export class BooksummPage {
   bprintData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController) {
     this.bprintData = navParams.get('binputData');
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BooksummPage');
+    // console.log('ionViewDidLoad BooksummPage');
+  }
+
+  gotoBooking() {
+    this.navCtrl.setRoot(BookingPage);
   }
 
   showToast(data) {
@@ -92,32 +98,52 @@ export class BooksummPage {
     if (!data.from) {
       data.from = 'Nairobi';
     }
-    let company = "Nucleur Ltd";
+    let company = "Nucleur Investments Ltd";
+    let addr = "Nairobi";
+    let today = new Date();
+    let printDate = today.toISOString().split('T')[0];
+
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();
-
+    
     result
       .codepage('cp936')
       .align('center')
       .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
       .line(company)
+      .newline()
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
+      .line(addr)
+      .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .align('left')
-      .text('From: ' + data.from)
+      .text('TICKET RECEIPT')
       .newline()
-      .text('To: ' + data.to)
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Date:        ' + printDate)
       .newline()
-      .text('Date: ' + data.date)
+      .text('Ticket No:   ' + data.ticket)
       .newline()
-      .text('Bus: ' + data.vehicle)
+      .text('Name:        ' + data.name)
       .newline()
-      .text('Fare: ' + data.fare)
+      .text('Bus:         ' + data.vehicle)
       .newline()
-      .text('Name: ' + data.name)
+      .text('Travel Date: ' + data.date)
       .newline()
-      .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
+      .text('From:        ' + data.from)
       .newline()
+      .text('To:          ' + data.to)
+      .newline()
+      .text('Fare:        ' + data.fare)
+      .newline()
+      .newline()
+      .text('Booked by:   ' + data.username)
+      .newline()
+      .newline()
+      .align('center')
+      .text('Terms and Conditions Apply')
+      .newline()
+      .text('info@nucleurinvestments.com')
       .newline()
       .newline()
       .newline()

@@ -43,12 +43,26 @@ export class NucltmsProvider {
     });
   }
 
-  postBooking() {
-
+  postBooking(binputData) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+`book.php?user_id=${binputData.userid}&fromTown=${binputData.from}&toTown=${binputData.to}&date=${binputData.date}&fare=${binputData.fare}&pass_name=${binputData.name}&Busid=${binputData.vehicle}`, this.headerParams)
+      .subscribe(data => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+      });
+    });
   }
 
-  postDelivery() {
-
+  postDelivery(dinputData) {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+`delivery.php?busname=${dinputData.vehicle}&servch=${dinputData.svcch}&otherch=${dinputData.other}&userid=${dinputData.userid}&username=${dinputData.username}&numpass=${dinputData.numpass}&grossamt=${dinputData.collamt}&loan=${dinputData.loan}&insurance=${dinputData.ins}&fromcityname=${dinputData.from}&tocityname=${dinputData.to}`, this.headerParams)
+      .subscribe(data => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+      });
+    });
   }
 
 }

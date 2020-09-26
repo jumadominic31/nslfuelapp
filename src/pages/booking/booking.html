@@ -21,7 +21,7 @@
   <ion-list>
     <form novalidate (ngSubmit)="confirmBooking(binputData)" [formGroup]="bookingform" >
       <ion-item>
-        <ion-label color="primary" floating >From</ion-label>
+        <ion-label color="primary" floating >From*</ion-label>
         <ion-input formControlName='from' disabled [(ngModel)]='binputData.from' [class.error1]='!bookingform.controls.from.valid && bookingform.controls.from.dirty'></ion-input>
       </ion-item>
       <ion-item no-lines *ngIf="( bookingform.get('from').hasError('required') ) && bookingform.get('from').touched">
@@ -29,31 +29,36 @@
           Please input From location
         </div>
       </ion-item>
+      <!-- <ion-item>
+        <ion-searchbar formControlName='searchTo' [(ngModel)]="searchToString" (input)="searchTo($event)" placeholder="Search Destination"></ion-searchbar>
+      </ion-item> -->
       <ion-item>
-        <ion-label color="primary">To</ion-label>
+        <ion-label color="primary">To*</ion-label>
+        
         <ion-select formControlName='to' [(ngModel)]="binputData.to" name="to">
           <ion-option *ngFor="let city of cities" [value]="city">{{city}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Date</ion-label>
+        <ion-label color="primary">Travel Date*</ion-label>
         <ion-datetime formControlName='date' displayFormat="D-MMM-YYYY" pickerFormat="D-MMM-YYYY" [(ngModel)]="binputData.date" ></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Bus</ion-label>
+        <ion-label color="primary">Bus*</ion-label>
         <ion-select formControlName='vehicle' [(ngModel)]="binputData.vehicle" name="vehicle">
           <ion-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating >Name</ion-label>
+        <ion-label color="primary" floating >Passenger Name*</ion-label>
         <ion-input formControlName='pass_name' [(ngModel)]='binputData.name'></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating >Fare</ion-label>
+        <ion-label color="primary" floating >Fare*</ion-label>
         <ion-input formControlName='fare' type="number" [(ngModel)]='binputData.fare'></ion-input>
       </ion-item>
-      <button ion-button full type="submit" [disabled]="bookingform.invalid">Book</button>
+      <button ion-button full type="submit" [disabled]="bookingform.invalid">Book Ticket</button>
     </form>
+    <button ion-button full color="danger" (click)=resetVals()>Reset Form</button>
   </ion-list>
 </ion-content>

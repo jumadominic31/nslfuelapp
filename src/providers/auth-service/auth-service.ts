@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage' ;
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -32,6 +33,7 @@ export class AuthServiceProvider {
         this.http.get(this.apiUrl+`login.php?id=${credentials.username}&pw=${credentials.password}`)
         .subscribe(data => {
           this.currentUser = new User(data[0].username, data[0].userid, data[0].office_name, data[0].office_id);
+          this.storage.set('userDetails', this.currentUser);
           let access = (data[0].status === 'Success');
           observer.next(access);
           observer.complete();
@@ -42,9 +44,9 @@ export class AuthServiceProvider {
     }
   }
  
-  public getUserInfo() : User {
-    return this.currentUser;
-  }
+  // public getUserInfo() : User {
+  //   return this.currentUser;
+  // }
  
   public logout() {
     return Observable.create(observer => {
@@ -54,7 +56,7 @@ export class AuthServiceProvider {
     });
   }
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public storage: Storage) {
     // console.log('Hello AuthServiceProvider Provider');
   }
 

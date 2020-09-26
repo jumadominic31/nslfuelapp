@@ -55,6 +55,7 @@ export class MyApp {
     else {
       this.storage.remove('cities');
       this.storage.remove('vehicles');
+      this.storage.remove('userDetails');
       this.nav.setRoot(LoginPage);
     }
   }

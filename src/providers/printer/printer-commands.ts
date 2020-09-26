@@ -15,7 +15,8 @@ export const commands = {
   //EOL: [\n],
   HORIZONTAL_LINE: {
     HR_58MM: '================================',
-    HR2_58MM: '********************************'
+    HR2_58MM: '********************************',
+    HR3_58MM: '--------------------------------'
   },
   FEED_CONTROL_SEQUENCES: {
     CTL_LF: [0x0a], // Print and line feed
