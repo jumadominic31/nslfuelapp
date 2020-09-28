@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage' ;
+import { IonicSelectableComponent } from 'ionic-selectable';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 import { DelisummPage } from './../delisumm/delisumm';
@@ -38,6 +39,13 @@ export class DeliveryPage {
       });
   }
 
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    // console.log('port:', event.value);
+  }
+
   ionViewDidLoad() {
     // console.log('ionViewDidLoad DeliveryPage');
   }
@@ -56,7 +64,29 @@ export class DeliveryPage {
     });
   }
 
-  confirmDelivery(dinputData) {
+  confirmDelivery() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Please confirm delivery',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.postDelivery();
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            return;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  postDelivery() {
     this.showLoading();
     // this.showSuccess(dinputData);
     this.nucltms.postDelivery(this.dinputData).then(data => {

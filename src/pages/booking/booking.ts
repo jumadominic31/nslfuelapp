@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NucltmsProvider } from './../../providers/nucltms/nucltms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { Storage } from '@ionic/storage' ;
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 import { BooksummPage } from './../booksumm/booksumm';
 import { LoginPage } from './../login/login';
@@ -12,13 +13,16 @@ import { LoginPage } from './../login/login';
   selector: 'page-booking',
   templateUrl: 'booking.html',
 })
+
 export class BookingPage {
+  // ports: any;
+  // port: any;
+
   loading: Loading;
   userid = '';
   username = '';
   office_name = '';
   cities: any = [];
-  // citiesInitial: any = [];
   vehicles: any = [];
   bookOutput: any = {};
 
@@ -37,11 +41,18 @@ export class BookingPage {
 
     this.storage.get('cities').then(data => {
       this.cities = data;
-      // this.citiesInitial = data;
     });
     this.storage.get('vehicles').then(data => {
       this.vehicles =  data;
     });
+
+  }
+
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    // console.log('port:', event.value);
   }
 
   public logout() {
@@ -70,26 +81,29 @@ export class BookingPage {
     });
   }
 
-  // searchTo(searchbar) {
-  //   this.cities = this.citiesInitial;
+  confirmBooking() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Please confirm booking',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.postBooking();
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            return;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
-  //   // set q to the value of the searchbar
-  //   let q = searchbar.value;
-
-  //   // if the value is an empty string don't filter the items
-  //   if (q.trim() == '') {
-  //       return;
-  //   }
-
-  //   this.cities = this.cities.filter((v) => {
-  //       if (v.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-  //           return true;
-  //       }
-  //       return false;
-  //   })
-  // }
-
-  confirmBooking(binputData) {
+  postBooking() {
     this.showLoading();
     // this.showSuccess(binputData);
     this.nucltms.postBooking(this.binputData).then(data => {

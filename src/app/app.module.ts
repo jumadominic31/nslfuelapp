@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { HomePage } from '../pages/home/home';
 import { BookingPage } from './../pages/booking/booking';
@@ -33,7 +34,8 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
   BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicSelectableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

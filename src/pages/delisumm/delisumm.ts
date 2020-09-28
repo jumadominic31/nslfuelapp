@@ -94,25 +94,29 @@ export class DelisummPage {
   }
 
   prepareToPrint(data) {
-    // u can remove this when generate the receipt using another method
-    if (!data.from) {
-      data.from = 'Nairobi';
-    }
-    let company = "Nucleur Investments Ltd";
-    let addr = "Nairobi";
+    let company_1 = "NUCLEUR";
+    let company_2 = "INVESTMENTS LTD.";
+    let addr = "Box 69488-00400, Nairobi";
+    let website = "www.nucleurinvestments.com";
     let today = new Date();
     let printDate = today.toISOString().split('T')[0];
+
+    data.loan = data.loan == "" ? 0 : data.loan;
+    data.ins = data.ins == "" ? 0 : data.ins;
+    data.other = data.other == "" ? 0 : data.other;
+
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();
-
+    
     result
       .codepage('cp936')
       .align('center')
       .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
-      .line(company)
-      .newline()
+      .line(company_1)
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
+      .line(company_2)
       .line(addr)
+      .line(website)
       .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .align('left')
@@ -142,7 +146,14 @@ export class DelisummPage {
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .text('Svc Charge:  ' + data.svcch)
       .newline()
-      .text('Others Tot:  ' + data.other)
+      .text('Loan:        ' + data.loan)
+      .newline()
+      .text('Insurance:   ' + data.ins)
+      .newline()
+      .text('Others:      ' + data.other)
+      .newline()
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
+      .text('Tot Deducts: ' + data.totdeduct)
       .newline()
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .text('Net Amt:     ' + data.netamt)
@@ -150,7 +161,7 @@ export class DelisummPage {
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .newline()
       .newline()
-      .text('Booked by:   ' + data.username)
+      .text('Delivery by: ' + data.username)
       .newline()
       .newline()
       .align('center')

@@ -94,12 +94,10 @@ export class BooksummPage {
   }
 
   prepareToPrint(data) {
-    // u can remove this when generate the receipt using another method
-    if (!data.from) {
-      data.from = 'Nairobi';
-    }
-    let company = "Nucleur Investments Ltd";
-    let addr = "Nairobi";
+    let company_1 = "NUCLEUR";
+    let company_2 = "INVESTMENTS LTD.";
+    let addr = "Box 69488-00400, Nairobi";
+    let website = "www.nucleurinvestments.com";
     let today = new Date();
     let printDate = today.toISOString().split('T')[0];
 
@@ -110,23 +108,24 @@ export class BooksummPage {
       .codepage('cp936')
       .align('center')
       .raw(commands.TEXT_FORMAT.TXT_4SQUARE)
-      .line(company)
-      .newline()
+      .line(company_1)
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
+      .line(company_2)
       .line(addr)
+      .line(website)
       .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .align('left')
-      .text('TICKET RECEIPT')
+      .text('CUSTOMER TICKET')
       .newline()
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .text('Date:        ' + printDate)
       .newline()
       .text('Ticket No:   ' + data.ticket)
       .newline()
-      .text('Name:        ' + data.name)
+      .text('Client Name: ' + data.name)
       .newline()
-      .text('Bus:         ' + data.vehicle)
+      .text('Vehicle:     ' + data.vehicle)
       .newline()
       .text('Travel Date: ' + data.date)
       .newline()
