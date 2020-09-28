@@ -107,12 +107,15 @@ export class BookingPage {
     this.showLoading();
     // this.showSuccess(binputData);
     this.nucltms.postBooking(this.binputData).then(data => {
-      if (data[0].status = "success") {        
-        console.log(JSON.stringify(data));
-        this.bookOutput = data[0];
-        this.binputData.ticket = this.bookOutput.ticket;
-        this.showSuccess(this.bookOutput);
-      } else {
+      if (data){
+        if (data[0].status = "success") {        
+          console.log(JSON.stringify(data));
+          this.bookOutput = data[0];
+          this.binputData.ticket = this.bookOutput.ticket;
+          this.showSuccess(this.bookOutput);
+        }
+      }
+      else {
         this.showError("Try Booking Again...");
       }
     },
