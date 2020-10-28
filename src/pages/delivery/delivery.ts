@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { MenuController, AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage' ;
 import { IonicSelectableComponent } from 'ionic-selectable';
@@ -23,8 +23,8 @@ export class DeliveryPage {
   vehicles: any = [];
   deliveryform: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public nucltms: NucltmsProvider, public storage: Storage, public auth: AuthServiceProvider, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
-
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public nucltms: NucltmsProvider, public storage: Storage, public auth: AuthServiceProvider, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+    this.menuCtrl.enable(true, 'myMenu');
       this.storage.get('userDetails').then(data => {
         this.dinputData.from = data.office_name;
         this.dinputData.userid = data.userid;

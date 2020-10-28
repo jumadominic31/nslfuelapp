@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { MenuController, AlertController, LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
 import { PrinterProvider } from './../../providers/printer/printer';
 import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
@@ -14,7 +14,8 @@ export class DelisummPage {
 
   receipt: any;
   dprintData: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController) {
+    this.menuCtrl.enable(true, 'myMenu');
     this.dprintData = navParams.get('dinputData');
   }
 
@@ -103,7 +104,7 @@ export class DelisummPage {
 
     data.loan = data.loan == "" ? 0 : data.loan;
     data.ins = data.ins == "" ? 0 : data.ins;
-    data.other = data.other == "" ? 0 : data.other;
+    data.other = data.other == "" ? 0 : data.other  ;
 
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();

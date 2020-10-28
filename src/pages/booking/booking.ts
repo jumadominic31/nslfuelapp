@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { MenuController, AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NucltmsProvider } from './../../providers/nucltms/nucltms';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
@@ -29,7 +29,8 @@ export class BookingPage {
   bookingform: FormGroup;
   binputData = {from : "", to : "", date : "", vehicle : "", fare : "", name : "", userid : "", ticket : "", username : ""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private auth: AuthServiceProvider, private storage: Storage, private nucltms: NucltmsProvider, public loadingCtrl: LoadingController) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private auth: AuthServiceProvider, private storage: Storage, private nucltms: NucltmsProvider, public loadingCtrl: LoadingController) {
+    this.menuCtrl.enable(true, 'myMenu');
     this.storage.get('userDetails').then(data => {
       this.userid = data.userid;
       this.username = data.username;
