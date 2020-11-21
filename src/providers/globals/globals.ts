@@ -11,6 +11,15 @@ import { Injectable } from '@angular/core';
 export class GlobalsProvider {
 
   token_id: string = '';
+  username: string = '';
+  userdetails: any = {};
+  pumpdetails: any = [];
+  rates: any = [];
+  rate_diesel: number = 0;
+  rate_petrol: number = 0;
+  rate_kerosene: number = 0;
+  vehicles: any = [];
+  stations: any = [];
 
   constructor(public http: HttpClient) {
   }

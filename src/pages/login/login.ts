@@ -32,45 +32,63 @@ export class LoginPage {
   public login() {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {        
-        
+      if (allowed) {     
         this.event.publish('userLogged', this.registerCredentials.username);
-
-        setTimeout(() => {
-          this.fuelapp.getPumpDetails().then(data => {
-            this.pumpdetails = data;
-            this.storage.set('pumpdetails', this.pumpdetails);
-          });
+        console.log(this.globals);
+        this.rates = this.globals.rates;
+        for (let i = 0; i < this.rates.length; i++) {
+          let data = this.rates[i];
+          if (data.fueltype == 'diesel'){
+            this.globals.rate_diesel = data.sellprice;
+          } else if (data.fueltype == 'petrol'){
+            this.globals.rate_petrol = data.sellprice;
+          } else if (data.fueltype == 'kerosene'){
+            this.globals.rate_kerosene = data.sellprice;
+          }
+        }
+        // setTimeout(() => {
+        //   this.fuelapp.getPumpDetails().then(data => {
+        //     this.pumpdetails = data;
+        //     this.globals.pumpdetails = data;
+        //     // this.storage.set('pumpdetails', this.pumpdetails);
+        //   });
           
-          this.fuelapp.getVehicles().then(data => {
-            this.vehicles = data;
-            this.storage.set('vehicles', this.vehicles);
-          });
+        //   this.fuelapp.getVehicles().then(data => {
+        //     this.vehicles = data;
+        //     this.globals.vehicles = data;
+        //     // this.storage.set('vehicles', this.vehicles);
+        //   });
   
-          this.fuelapp.getRates().then(data => {
-            if (data){
-              this.rates = data;
-              for (let i = 0; i < this.rates.length; i++) {
-                let data = this.rates[i];
-                if (data.fueltype == 'diesel'){
-                  let rate_diesel = data.sellprice;
-                  this.storage.set('rate_diesel', rate_diesel);
-                } else if (data.fueltype == 'petrol'){
-                  let rate_petrol = data.sellprice;
-                  this.storage.set('rate_petrol', rate_petrol);
-                } else if (data.fueltype == 'kerosene'){
-                  let rate_kerosene = data.sellprice;
-                  this.storage.set('rate_kerosene', rate_kerosene);
-                }
-              }
-              // this.storage.set('rates', this.rates);
-            }
+        //   this.fuelapp.getRates().then(data => {
+        //     if (data){
+        //       this.rates = data;
+        //       this.globals.rates = data;
+        //       for (let i = 0; i < this.rates.length; i++) {
+        //         let data = this.rates[i];
+        //         if (data.fueltype == 'diesel'){
+        //           let rate_diesel = data.sellprice;
+        //           this.globals.rate_diesel = data.sellprice;
+        //           // this.storage.set('rate_diesel', rate_diesel);
+        //         } else if (data.fueltype == 'petrol'){
+        //           let rate_petrol = data.sellprice;
+        //           this.globals.rate_petrol = data.sellprice;
+        //           // this.storage.set('rate_petrol', rate_petrol);
+        //         } else if (data.fueltype == 'kerosene'){
+        //           let rate_kerosene = data.sellprice;
+        //           this.globals.rate_kerosene = data.sellprice;
+        //           // this.storage.set('rate_kerosene', rate_kerosene);
+        //         }
+        //       }
+        //       // this.storage.set('rates', this.rates);
+        //     }
             
-          });
-        }, 3000);
-        setTimeout(() => {
-          this.navCtrl.setRoot(MakesalePage, {pumpdetails : this.pumpdetails, vehicles : this.vehicles });
-        }, 4000);
+        //   });
+
+        //   console.log(this.globals);
+        // }, 2000);
+        // setTimeout(() => {
+          this.navCtrl.setRoot(MakesalePage, {pumpdetails : this.globals.pumpdetails, vehicles : this.globals.vehicles });
+        // }, 3000);
 
         
       } else {

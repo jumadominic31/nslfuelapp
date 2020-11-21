@@ -15,19 +15,17 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Welcome inside, Peter!</h3>
-  <p>Station Name: Naivasha</p>
-  <p>{{role}}</p>
+  <h3>Welcome inside, {{username}}</h3>
   <ion-list>
     <form (ngSubmit)="confirmSale(saleInput)" [formGroup]="saleform">
-      <!-- <ion-item>
-        <ion-label color="primary" floating>Vehicle*</ion-label>
-        <ion-select formControlName='vehicle' [(ngModel)]='saleInput.vehicle'>
-          <ion-option *ngFor="let veh of vehicles" value="{{veh}}">
-            {{veh}}
+      <ion-item>
+        <ion-label color="primary" floating>Station*</ion-label>
+        <ion-select formControlName='station' [(ngModel)]='station' (ionChange)='selStation($event)'>
+          <ion-option *ngFor="let station of stations" value="{{station.id}}">
+            {{station.station}}
           </ion-option>
         </ion-select>
-      </ion-item> -->
+      </ion-item>
       <ion-item>
         <ion-label color="primary">Vehicle*</ion-label>
         <ionic-selectable item-content formControlName='vehicle' [items]="vehicles" itemValueField="" itemTextFied="" [canSearch]="true" (onChange)="portChange($event)" [(ngModel)]="saleInput.vehicle" name="vehicle">

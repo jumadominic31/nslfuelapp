@@ -19,28 +19,32 @@ import 'rxjs/add/operator/map';
 //   }
 // }
 
-export class Token {
-  token_id : string;
+// export class Token {
+//   token_id : string;
 
-  constructor(token_id: string) {
-    this.token_id = token_id;
-  }
-}
+//   constructor(token_id: string) {
+//     this.token_id = token_id;
+//   }
+// }
 
 interface LoginResponse {
   status : string,
   token : string,
+  station : [{'id': string}],
+  vehicles: [string],
+  pumps: [{'id': string, 'stationid' : string, 'pumpname': string, 'fueltype' : string}],
+  rates: [{'id': string, 'fueltype': string, 'sellprice': number, 'stationid': string}],
   userdetails : [{'address' : string, 'city' : string, 'companyid' : string, 'email' : string, 'id' : string, 'name' : string, 'phone' : string, 'receipt_header' : string, 'station' : string, 'stationid' : string, 'username' : string }]
 }
 
 @Injectable()
 export class AuthServiceProvider {
   
-  apiUrl = 'https://www.avanettech.co.ke/fuelstapp/api';
-  // apiUrl = "http://fuelstapp.local/api";
+  // apiUrl = 'https://www.avanettech.co.ke/fuelstapp/api';
+  apiUrl = "http://fuelstapp.local/api";
   // currentUser: User;
 
-  token: Token;
+  token_id: string;
   userdetails: any;
 
   public login(credentials) {
@@ -57,11 +61,17 @@ export class AuthServiceProvider {
           })
         .subscribe(
           data => {
-            this.token = new Token(data.token);
-            this.storage.set('token', this.token);
-            this.storage.set('username', credentials.username);
-            this.storage.set('userdetails', data.userdetails);
-            // this.currentUser = new User(data[0].username, data[0].userid, data[0].office_name, data[0].office_id);
+            this.token_id = data.token;
+            this.globals.token_id = data.token;
+            this.globals.username = credentials.username;
+            this.globals.userdetails = data.userdetails;
+            this.globals.vehicles = data.vehicles;
+            this.globals.stations = data.station;
+            this.globals.pumpdetails = data.pumps;
+            this.globals.rates = data.rates;
+            // this.storage.set('token', this.token_id);
+            // this.storage.set('username', credentials.username);
+            // this.storage.set('userdetails', data.userdetails);
             let access = (data.status === "success");
             observer.next(access);
             observer.complete();  
