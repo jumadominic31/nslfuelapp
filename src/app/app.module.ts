@@ -14,11 +14,15 @@ import { BooksummPage } from './../pages/booksumm/booksumm';
 import { DeliveryPage } from './../pages/delivery/delivery';
 import { DelisummPage } from './../pages/delisumm/delisumm';
 import { LoginPage } from './../pages/login/login';
+import { MakesalePage } from './../pages/makesale/makesale';
+import { SalesummPage } from './../pages/salesumm/salesumm';
 
 import { PrinterProvider } from './../providers/printer/printer';
 import { MyApp } from './app.component';
 import { NucltmsProvider } from '../providers/nucltms/nucltms';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { FuelappfnProvider } from '../providers/fuelappfn/fuelappfn';
+import { GlobalsProvider } from '../providers/globals/globals';
 
 @NgModule({
   declarations: [
@@ -28,10 +32,12 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     BookingPage,
     BooksummPage,
     DeliveryPage,
-    DelisummPage
+    DelisummPage,
+    MakesalePage,
+    SalesummPage,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
@@ -45,7 +51,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     BookingPage,
     BooksummPage,
     DeliveryPage,
-    DelisummPage
+    DelisummPage,
+    MakesalePage,
+    SalesummPage,
   ],
   providers: [
     StatusBar,
@@ -54,7 +62,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     BluetoothSerial,
     PrinterProvider,
     NucltmsProvider,
-    AuthServiceProvider
+    AuthServiceProvider,
+    FuelappfnProvider,
+    GlobalsProvider
   ]
 })
 export class AppModule {}

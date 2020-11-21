@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Print Receipt</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="bprintData">
+    <ion-item>
+      <ion-label color="primary" floating>Date</ion-label>
+      <ion-input [(ngModel)]='bprintData.created_at' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Receipt #</ion-label>
+      <ion-input [(ngModel)]='bprintData.receiptno' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Vehicle</ion-label>
+      <ion-input [(ngModel)]='bprintData.vehregno' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Fuel Type</ion-label>
+      <ion-input [(ngModel)]='bprintData.fueltype' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Payment Method</ion-label>
+      <ion-input [(ngModel)]='bprintData.paymethod' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Amount</ion-label>
+      <ion-input [(ngModel)]='bprintData.amount' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Volume</ion-label>
+      <ion-input type="number" [(ngModel)]='bprintData.volume' disabled></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button full (click)="prepareToPrint(bprintData)">Print</button>
+  <button ion-button full color="danger" (click)=gotoSale()>Back to Sales</button>
+</ion-content>

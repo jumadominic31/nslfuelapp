@@ -5,9 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Storage } from '@ionic/storage' ;
 
-import { BookingPage } from './../pages/booking/booking';
-import { DeliveryPage } from './../pages/delivery/delivery';
 import { LoginPage } from './../pages/login/login';
+import { MakesalePage } from './../pages/makesale/makesale';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,8 +26,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Booking', component: BookingPage },
-      { title: 'Delivery', component: DeliveryPage },
+      { title: 'Sale', component: MakesalePage},
       { title: 'Logout', component: null}
     ];
 
@@ -53,9 +51,8 @@ export class MyApp {
       this.nav.setRoot(page.component);
     }
     else {
-      this.storage.remove('cities');
-      this.storage.remove('vehicles');
-      this.storage.remove('userDetails');
+      this.storage.remove('token');
+      this.storage.remove('username');
       this.nav.setRoot(LoginPage);
     }
   }

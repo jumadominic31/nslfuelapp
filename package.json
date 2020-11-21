@@ -1,5 +1,5 @@
 {
-  "name": "nucleur-tms-with-bt-printer",
+  "name": "nsl-fuelapp-with-bt-printer",
   "version": "0.0.1",
   "author": "Quadcorn Business Solutions",
   "homepage": "http://quadcorn.co.ke/",
@@ -46,9 +46,9 @@
     "@ionic/app-scripts": "^3.2.4",
     "cordova-sqlite-storage": "^5.1.0",
     "ionic": "^3.0.0",
-    "typescript": "~2.6.2"
+    "typescript": "^2.6.2"
   },
-  "description": "Nucleur booking app by Quadcorn Ltd",
+  "description": "NSL fuel app by Quadcorn Ltd",
   "cordova": {
     "plugins": {
       "cordova-plugin-bluetooth-serial": {},

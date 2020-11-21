@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { NucltmsProvider } from './../../providers/nucltms/nucltms';
+import { FuelappfnProvider } from './../../providers/fuelappfn/fuelappfn';
+import { GlobalsProvider } from './../../providers/globals/globals';
 import { Storage } from '@ionic/storage' ;
 
-import { BookingPage } from '../booking/booking';
+import { MakesalePage } from './../makesale/makesale';
 
 
 // @IonicPage()
@@ -15,10 +16,12 @@ import { BookingPage } from '../booking/booking';
 export class LoginPage {
   loading: Loading;
   registerCredentials = { username: '', password: '' };
-  cities: any = [];
   vehicles: any = [];
+  userdetails: any = {};
+  pumpdetails: any = {};
+  rates: any;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private auth: AuthServiceProvider, private nucltms: NucltmsProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public event: Events, public storage: Storage) {
+  constructor(public globals: GlobalsProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private auth: AuthServiceProvider, private fuelapp: FuelappfnProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public event: Events, public storage: Storage) {
     this.menuCtrl.enable(false, 'myMenu')
   }
 
@@ -32,22 +35,44 @@ export class LoginPage {
       if (allowed) {        
         
         this.event.publish('userLogged', this.registerCredentials.username);
-        
-        // this.cities = ['Naivasha', 'Nairobi', 'Nakuru'];
-        // this.vehicles = ['KBH162D', 'KCY398H', 'KCG399H'];
-        // this.storage.set('cities', this.cities);
-        // this.storage.set('vehicles', this.vehicles);
 
-        this.nucltms.getCities().then(data => {
-          this.cities = data;
-          this.storage.set('cities', this.cities);
-          console.log(this.cities);
-        });
-        this.nucltms.getVehicles().then(data => {
-          this.vehicles = data;
-          this.storage.set('vehicles', this.vehicles);
-        });
-        setTimeout(() => {this.navCtrl.setRoot(BookingPage)}, 2000);
+        setTimeout(() => {
+          this.fuelapp.getPumpDetails().then(data => {
+            this.pumpdetails = data;
+            this.storage.set('pumpdetails', this.pumpdetails);
+          });
+          
+          this.fuelapp.getVehicles().then(data => {
+            this.vehicles = data;
+            this.storage.set('vehicles', this.vehicles);
+          });
+  
+          this.fuelapp.getRates().then(data => {
+            if (data){
+              this.rates = data;
+              for (let i = 0; i < this.rates.length; i++) {
+                let data = this.rates[i];
+                if (data.fueltype == 'diesel'){
+                  let rate_diesel = data.sellprice;
+                  this.storage.set('rate_diesel', rate_diesel);
+                } else if (data.fueltype == 'petrol'){
+                  let rate_petrol = data.sellprice;
+                  this.storage.set('rate_petrol', rate_petrol);
+                } else if (data.fueltype == 'kerosene'){
+                  let rate_kerosene = data.sellprice;
+                  this.storage.set('rate_kerosene', rate_kerosene);
+                }
+              }
+              // this.storage.set('rates', this.rates);
+            }
+            
+          });
+        }, 3000);
+        setTimeout(() => {
+          this.navCtrl.setRoot(MakesalePage, {pumpdetails : this.pumpdetails, vehicles : this.vehicles });
+        }, 4000);
+
+        
       } else {
         this.showError("Access Denied");
       }

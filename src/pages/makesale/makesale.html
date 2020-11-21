@@ -1,0 +1,69 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fuel Sale</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h3>Welcome inside, Peter!</h3>
+  <p>Station Name: Naivasha</p>
+  <p>{{role}}</p>
+  <ion-list>
+    <form (ngSubmit)="confirmSale(saleInput)" [formGroup]="saleform">
+      <!-- <ion-item>
+        <ion-label color="primary" floating>Vehicle*</ion-label>
+        <ion-select formControlName='vehicle' [(ngModel)]='saleInput.vehicle'>
+          <ion-option *ngFor="let veh of vehicles" value="{{veh}}">
+            {{veh}}
+          </ion-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-item>
+        <ion-label color="primary">Vehicle*</ion-label>
+        <ionic-selectable item-content formControlName='vehicle' [items]="vehicles" itemValueField="" itemTextFied="" [canSearch]="true" (onChange)="portChange($event)" [(ngModel)]="saleInput.vehicle" name="vehicle">
+        </ionic-selectable>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Fuel Type*</ion-label>
+        <ion-select formControlName='fueltype' [(ngModel)]='saleInput.fueltype'>
+          <ion-option *ngFor="let ftype of fueltype" value="{{ftype}}">
+            {{ftype}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Payment Method*</ion-label>
+        <ion-select formControlName='pmethod' [(ngModel)]='saleInput.pmethod'>
+          <ion-option *ngFor="let pyt of payment" value="{{pyt}}">
+            {{pyt}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Amount*</ion-label>
+        <ion-input formControlName='amount' type="number" [(ngModel)]='saleInput.amount'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Pump Name*</ion-label>
+        <ion-select formControlName='pumpid' [(ngModel)]='saleInput.pumpid'>
+          <ion-option  *ngFor="let pump of pumps" value="{{pump.id}}">
+            {{pump.pumpname}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <button ion-button full type="submit" [disabled]="saleform.invalid">Book Sale</button>
+    </form>
+    <button ion-button full color="danger" (click)=resetVals()>Reset</button>
+  </ion-list>
+</ion-content>
+

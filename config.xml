@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ke.co.quadcorn.nucleur.tms" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Nucleur Booking App</name>
-    <description>Nucleur booking app by Quadcorn Ltd</description>
+<widget id="ke.co.quadcorn.nsl.fuelapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>NSL Fuel App</name>
+    <description>NSL Fuel app by Quadcorn Ltd</description>
     <author email="info@quadcorn.co.ke" href="http://quadcorn.co.ke/">Quadcorn Business Solutions</author>
     <content src="index.html" />
     <access origin="*" />
