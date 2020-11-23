@@ -9,13 +9,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { IonicSelectableModule } from 'ionic-selectable';
 
 import { HomePage } from '../pages/home/home';
-import { BookingPage } from './../pages/booking/booking';
-import { BooksummPage } from './../pages/booksumm/booksumm';
-import { DeliveryPage } from './../pages/delivery/delivery';
-import { DelisummPage } from './../pages/delisumm/delisumm';
 import { LoginPage } from './../pages/login/login';
 import { MakesalePage } from './../pages/makesale/makesale';
 import { SalesummPage } from './../pages/salesumm/salesumm';
+import { ShiftsummPage } from './../pages/shiftsumm/shiftsumm';
+import { PricingPage } from './../pages/pricing/pricing';
+import { ChpasswordPage } from './../pages/chpassword/chpassword';
 
 import { PrinterProvider } from './../providers/printer/printer';
 import { MyApp } from './app.component';
@@ -29,12 +28,11 @@ import { GlobalsProvider } from '../providers/globals/globals';
     MyApp,
     HomePage,
     LoginPage,
-    BookingPage,
-    BooksummPage,
-    DeliveryPage,
-    DelisummPage,
     MakesalePage,
     SalesummPage,
+    ShiftsummPage,
+    PricingPage,
+    ChpasswordPage
   ],
   imports: [
     BrowserModule,
@@ -48,12 +46,11 @@ import { GlobalsProvider } from '../providers/globals/globals';
     MyApp,
     HomePage,
     LoginPage,
-    BookingPage,
-    BooksummPage,
-    DeliveryPage,
-    DelisummPage,
     MakesalePage,
     SalesummPage,
+    ShiftsummPage,
+    PricingPage,
+    ChpasswordPage
   ],
   providers: [
     StatusBar,

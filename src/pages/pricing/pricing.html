@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fuel Prices</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>Date: {{curr_date}}</ion-item>
+    <ion-item>Petrol   : Kes. {{rate_petrol}}</ion-item>
+    <ion-item>Diesel   : Kes. {{rate_diesel}}</ion-item>
+    <ion-item>Kerosene : Kes. {{rate_kerosene}}</ion-item>
+  </ion-list>
+  <button ion-button full color="danger" (click)=gotohomepage()>Home</button>
+
+</ion-content>

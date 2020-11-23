@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage' ;
 import { GlobalsProvider } from './../globals/globals';
 
 @Injectable()
 export class FuelappfnProvider {
 
-  // apiUrl = 'https://www.avanettech.co.ke/fuelstapp/api';
-  apiUrl = "http://fuelstapp.local/api";
+  apiUrl = 'https://www.avanettech.co.ke/fuelstapp/api';
+  // apiUrl = "http://fuelstapp.local/api";
   headerParams: object  = {
      'Content-Type': 'application/json',
      'Accept': 'application/json',
@@ -21,77 +20,52 @@ export class FuelappfnProvider {
   vehicle: any;
   rates: any;
 
-  constructor(public http: HttpClient, private storage: Storage, public globals: GlobalsProvider) {
+  constructor(public http: HttpClient, public globals: GlobalsProvider) {
     this.username = globals.username;
     this.token = globals.token_id;
     this.userdetails = globals.userdetails;
     this.rates = globals.rates;
-
-    // this.storage.get('username').then(data => {
-    //   if (data){
-    //     this.username = data;
-    //   }
-    // });
-    // this.storage.get('token').then(data => {
-    //   if (data){
-    //     this.token =  data.token_id;
-    //   }
-    // });
-    // this.storage.get('userdetails').then(data => {
-    //   if (data){
-    //     let output: any = data;
-    //     this.user_id = output[0].id;
-    //   }
-    // });
-    // this.storage.get('rates').then(data => {
-    //   if (data){
-    //     this.rates = data;
-    //   }
-    // });
-
+    this.user_id = globals.userdetails.id;
   }
 
   ionViewWillEnter(){
-    // this.username = this.globals.username;
-    // this.token = this.globals.token_id;
-    // this.userdetails = this.globals.userdetails;
-    // this.rates = this.globals.rates;
   }
 
-  // getPumpDetails() {
-  //   return new Promise(resolve => {
-  //     this.http.get(this.apiUrl+'/pump/fuel/'+this.user_id+'?token='+this.token, this.headerParams)
-  //     .subscribe(data => {
-  //       resolve(data);
-  //     }, (err) => {
-  //       console.log(err);
-  //     });
-  //   });
-  // }
+  getShiftsales() {
+    let today = new Date();
+    let printDate = today.toISOString().split('T')[0];
+    let token_id = this.globals.token_id;
+    let user_id = this.globals.userdetails[0].id;
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/txns/'+user_id+'/'+printDate+'?token='+token_id, this.headerParams)
+      .subscribe(data => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+      });
+    });
+  }
 
-  // getVehicles() {
-  //   return new Promise(resolve => {
-  //     this.http.get(this.apiUrl+'/getvehicles?token='+this.token, this.headerParams)
-  //     .subscribe(data => {
-  //       resolve(data);
-  //     }, (err) => {
-  //       console.log(err);
-  //     });
-  //   });
-  // }
-
-  // getRates() {
-  //   let today = new Date();
-  //   let printDate = today.toISOString().split('T')[0];
-  //   return new Promise(resolve => {
-  //     this.http.get(this.apiUrl+'/rates/'+printDate+'?token='+this.token, this.headerParams)
-  //     .subscribe(data => {
-  //       resolve(data);
-  //     }, (err) => {
-  //       console.log(err);
-  //     });
-  //   });
-  // }
+  postchPassword(passdata) {
+    let token_id = this.globals.token_id;
+    let username = this.globals.username;
+    return new Promise(resolve => {
+      this.http.post(this.apiUrl +'/user/'+username+'/changepassword?token='+token_id, 
+      {
+        curr_password:  passdata.curr_pass,
+        new_password:   passdata.new_pass1,
+        new_password_2: passdata.new_pass2
+      })
+      .subscribe(
+        data => {
+          resolve(data);
+        }, 
+        error => {
+          console.log(error);
+        }
+      );   
+    });
+  }
 
   postSale(saleData) {
     let token_id = this.globals.token_id;

@@ -7,6 +7,9 @@ import { Storage } from '@ionic/storage' ;
 
 import { LoginPage } from './../pages/login/login';
 import { MakesalePage } from './../pages/makesale/makesale';
+import { ShiftsummPage } from './../pages/shiftsumm/shiftsumm';
+import { PricingPage } from './../pages/pricing/pricing';
+import { ChpasswordPage } from './../pages/chpassword/chpassword';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +29,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Sale', component: MakesalePage},
+      { title: 'Make Sale', component: MakesalePage },
+      { title: 'Sales Summary', component: ShiftsummPage },
+      { title: 'Fuel Prices', component: PricingPage },
+      { title: 'Change Password', component: ChpasswordPage },
       { title: 'Logout', component: null}
     ];
 

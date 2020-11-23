@@ -7,7 +7,7 @@
   
     <ion-content>
       <ion-list>
-        <ion-item >{{username}}</ion-item>
+        <ion-item >User: {{username}}</ion-item>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController, NavParams, AlertController, LoadingController, Loading, Events } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { FuelappfnProvider } from './../../providers/fuelappfn/fuelappfn';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { Storage } from '@ionic/storage' ;
 
@@ -21,7 +20,7 @@ export class LoginPage {
   pumpdetails: any = {};
   rates: any;
 
-  constructor(public globals: GlobalsProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private auth: AuthServiceProvider, private fuelapp: FuelappfnProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public event: Events, public storage: Storage) {
+  constructor(public globals: GlobalsProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private auth: AuthServiceProvider, private alertCtrl: AlertController, private loadingCtrl: LoadingController, public event: Events, public storage: Storage) {
     this.menuCtrl.enable(false, 'myMenu')
   }
 
@@ -46,51 +45,7 @@ export class LoginPage {
             this.globals.rate_kerosene = data.sellprice;
           }
         }
-        // setTimeout(() => {
-        //   this.fuelapp.getPumpDetails().then(data => {
-        //     this.pumpdetails = data;
-        //     this.globals.pumpdetails = data;
-        //     // this.storage.set('pumpdetails', this.pumpdetails);
-        //   });
-          
-        //   this.fuelapp.getVehicles().then(data => {
-        //     this.vehicles = data;
-        //     this.globals.vehicles = data;
-        //     // this.storage.set('vehicles', this.vehicles);
-        //   });
-  
-        //   this.fuelapp.getRates().then(data => {
-        //     if (data){
-        //       this.rates = data;
-        //       this.globals.rates = data;
-        //       for (let i = 0; i < this.rates.length; i++) {
-        //         let data = this.rates[i];
-        //         if (data.fueltype == 'diesel'){
-        //           let rate_diesel = data.sellprice;
-        //           this.globals.rate_diesel = data.sellprice;
-        //           // this.storage.set('rate_diesel', rate_diesel);
-        //         } else if (data.fueltype == 'petrol'){
-        //           let rate_petrol = data.sellprice;
-        //           this.globals.rate_petrol = data.sellprice;
-        //           // this.storage.set('rate_petrol', rate_petrol);
-        //         } else if (data.fueltype == 'kerosene'){
-        //           let rate_kerosene = data.sellprice;
-        //           this.globals.rate_kerosene = data.sellprice;
-        //           // this.storage.set('rate_kerosene', rate_kerosene);
-        //         }
-        //       }
-        //       // this.storage.set('rates', this.rates);
-        //     }
-            
-        //   });
-
-        //   console.log(this.globals);
-        // }, 2000);
-        // setTimeout(() => {
-          this.navCtrl.setRoot(MakesalePage, {pumpdetails : this.globals.pumpdetails, vehicles : this.globals.vehicles });
-        // }, 3000);
-
-        
+        this.navCtrl.setRoot(MakesalePage, {pumpdetails : this.globals.pumpdetails, vehicles : this.globals.vehicles });       
       } else {
         this.showError("Access Denied");
       }

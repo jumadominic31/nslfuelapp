@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Shift Sales Summary</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label color="primary">Total Amount</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_amt' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Cash Amount</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_cash' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Credit Amount</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_credit' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">MPesa Amount</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_mpesa' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Total Volume</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_volume' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Diesel Volume</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_diesel' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Petrol Volume</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_petrol' disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Kerosene Volume</ion-label>
+      <ion-input type="text" [(ngModel)]='shiftSales.summ_kerosene' disabled></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button full (click)="printShiftsumm(shiftSales)">Print</button>
+  <button ion-button full color="danger" (click)=gotohomepage()>Back Home</button>
+
+</ion-content>

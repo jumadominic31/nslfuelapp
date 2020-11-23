@@ -27,21 +27,29 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Vehicle*</ion-label>
-        <ionic-selectable item-content formControlName='vehicle' [items]="vehicles" itemValueField="" itemTextFied="" [canSearch]="true" (onChange)="portChange($event)" [(ngModel)]="saleInput.vehicle" name="vehicle">
-        </ionic-selectable>
-      </ion-item>
-      <ion-item>
         <ion-label color="primary" floating>Fuel Type*</ion-label>
-        <ion-select formControlName='fueltype' [(ngModel)]='saleInput.fueltype'>
+        <ion-select formControlName='fueltype' [(ngModel)]='saleInput.fueltype' (ionChange)='selFuel($event)' disabled='{{isDisabled}}'>
           <ion-option *ngFor="let ftype of fueltype" value="{{ftype}}">
             {{ftype}}
           </ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label color="primary">Select or Enter Vehicle</ion-label>
+        <ion-toggle checked="toggleDisabled" [(ngModel)]="toggleDisabled" [ngModelOptions]="{standalone: true}"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="toggleDisabled == true">
+        <ion-label color="primary">Select Vehicle*</ion-label>
+        <ionic-selectable item-content formControlName='vehicle' [items]="vehicles" itemValueField="" itemTextFied="" [canSearch]="true" (onChange)="portChange($event)" [(ngModel)]="saleInput.vehicle" name="vehicle" disabled='{{isDisabled}}'>
+        </ionic-selectable>
+      </ion-item>
+      <ion-item *ngIf="toggleDisabled != true">
+        <ion-label color="primary" floating>Enter Vehicle*</ion-label>
+        <ion-input formControlName='vehicle' type="text" [(ngModel)]='saleInput.vehicle' disabled='{{isDisabled}}'></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label color="primary" floating>Payment Method*</ion-label>
-        <ion-select formControlName='pmethod' [(ngModel)]='saleInput.pmethod'>
+        <ion-select formControlName='pmethod' [(ngModel)]='saleInput.pmethod' disabled='{{isDisabled}}'>
           <ion-option *ngFor="let pyt of payment" value="{{pyt}}">
             {{pyt}}
           </ion-option>
@@ -49,12 +57,12 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary" floating>Amount*</ion-label>
-        <ion-input formControlName='amount' type="number" [(ngModel)]='saleInput.amount'></ion-input>
+        <ion-input formControlName='amount' type="number" [(ngModel)]='saleInput.amount' disabled='{{isDisabled}}'></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary" floating>Pump Name*</ion-label>
-        <ion-select formControlName='pumpid' [(ngModel)]='saleInput.pumpid'>
-          <ion-option  *ngFor="let pump of pumps" value="{{pump.id}}">
+        <ion-select formControlName='pumpid' [(ngModel)]='saleInput.pumpid' disabled='{{pumpisDisabled}}'>
+          <ion-option  *ngFor="let pump of listpumps" value="{{pump.id}}">
             {{pump.pumpname}}
           </ion-option>
         </ion-select>

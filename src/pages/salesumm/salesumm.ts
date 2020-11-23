@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController, AlertController, LoadingController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { GlobalsProvider } from './../../providers/globals/globals';
 import { PrinterProvider } from './../../providers/printer/printer';
 import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
@@ -14,7 +15,7 @@ export class SalesummPage {
 
   receipt: any;
   bprintData: any;
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public globals: GlobalsProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private printer: PrinterProvider, private alertCtrl: AlertController, private loadCtrl: LoadingController, private toastCtrl: ToastController) {
     this.menuCtrl.enable(true, 'myMenu');
     this.bprintData = navParams.get('saleOutput');
   }
@@ -96,11 +97,13 @@ export class SalesummPage {
 
   prepareToPrint(data) {
     let company_1 = "NAIVASHA";
-    let company_2 = "SOUTHLAKE SACCO";
-    let addr = "Box 69488-00400, Naivasha";
-    let website = "www.naivashasouthlake.co.ke";
+    let company_2 = "SOUTHLAKE FILLING STATION";
+    let addr = "Box 575, Naivasha";
+    let tel = "0776 172 853";
+    let email = "nsls2013@gmail.com";
     let today = new Date();
     let printDate = today.toISOString().split('T')[0];
+    let username = this.globals.username;
 
     const encoder = new EscPosEncoder();
     const result = encoder.initialize();
@@ -113,11 +116,11 @@ export class SalesummPage {
       .raw(commands.TEXT_FORMAT.TXT_NORMAL)
       .line(company_2)
       .line(addr)
-      .line(website)
+      .line(tel)
       .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .align('left')
-      .text('SALE RECEIPT')
+      .text('SALES RECEIPT')
       .newline()
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .text('Date:        ' + printDate)
@@ -135,13 +138,13 @@ export class SalesummPage {
       .text('Volume:      ' + data.volume + 'l')
       .newline()
       .newline()
-      .text('Booked by:   ' + data.userid)
+      .text('Booked by:   ' + username)
       .newline()
       .newline()
       .align('center')
       .text('Terms and Conditions Apply')
       .newline()
-      .text('info@naivashasouthlake.co.ke')
+      .text(email)
       .newline()
       .newline()
       .newline()
