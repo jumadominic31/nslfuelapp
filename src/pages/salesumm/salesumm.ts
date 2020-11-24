@@ -99,7 +99,7 @@ export class SalesummPage {
     let company_1 = "NAIVASHA";
     let company_2 = "SOUTHLAKE FILLING STATION";
     let addr = "Box 575, Naivasha";
-    let tel = "0776 172 853";
+    let tel = "Tel: 0776 172 853";
     let email = "nsls2013@gmail.com";
     let today = new Date();
     let printDate = today.toISOString().split('T')[0];

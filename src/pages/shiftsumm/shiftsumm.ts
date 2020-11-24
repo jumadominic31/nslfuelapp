@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading, MenuController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, MenuController, AlertController, ToastController } from 'ionic-angular';
 import { FuelappfnProvider } from './../../providers/fuelappfn/fuelappfn';
 import { GlobalsProvider } from './../../providers/globals/globals';
 import { PrinterProvider } from './../../providers/printer/printer';
@@ -7,7 +7,7 @@ import { commands } from './../../providers/printer/printer-commands';
 import EscPosEncoder from 'esc-pos-encoder-ionic';
 import { MakesalePage } from './../makesale/makesale';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-shiftsumm',
   templateUrl: 'shiftsumm.html',
@@ -168,7 +168,7 @@ export class ShiftsummPage {
     let company_1 = "NAIVASHA";
     let company_2 = "SOUTHLAKE FILLING STATION";
     let addr = "Box 575, Naivasha";
-    let tel = "0776 172 853";
+    let tel = "Tel: 0776 172 853";
     let email = "nsls2013@gmail.com";
     let today = new Date();
     let printDate = today.toISOString().split('T')[0];
@@ -196,6 +196,7 @@ export class ShiftsummPage {
       .newline()
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .text('Cash Position')
+      .newline()
       .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .newline()
       .text('Cash Amt:    ' + data.summ_cash)
@@ -209,8 +210,8 @@ export class ShiftsummPage {
       .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .text('Volumes Sold')
-      .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .newline()
+      .text(commands.HORIZONTAL_LINE.HR3_58MM)
       .newline()
       .text('Diesel Vol:  ' + data.summ_diesel + 'l')
       .newline()
@@ -223,7 +224,7 @@ export class ShiftsummPage {
       .newline()
       .text(commands.HORIZONTAL_LINE.HR_58MM)
       .newline()
-      .text('Booked by:   ' + username)
+      .text('Report for:  ' + username)
       .newline()
       .newline()
       .align('center')

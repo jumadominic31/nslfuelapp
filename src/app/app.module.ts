@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicSelectableModule } from 'ionic-selectable';
 
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from './../pages/login/login';
 import { MakesalePage } from './../pages/makesale/makesale';
 import { SalesummPage } from './../pages/salesumm/salesumm';
@@ -26,7 +25,6 @@ import { GlobalsProvider } from '../providers/globals/globals';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     LoginPage,
     MakesalePage,
     SalesummPage,
@@ -44,7 +42,6 @@ import { GlobalsProvider } from '../providers/globals/globals';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     LoginPage,
     MakesalePage,
     SalesummPage,

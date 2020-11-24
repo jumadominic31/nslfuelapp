@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FuelappfnProvider } from './../../providers/fuelappfn/fuelappfn';
 
 import { MakesalePage } from './../makesale/makesale';
 import { LoginPage } from './../login/login';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-chpassword',
   templateUrl: 'chpassword.html',
